@@ -1,0 +1,7 @@
+name: Hearts
+version: '${project.version}'
+main: eu.maxpi.fiverr.hearts.Hearts
+api-version: 1.19
+authors: [ Macslolz ]
+description: Plugin to manage hearts
+website: fiverr.com/macslolz
