@@ -1,0 +1,16 @@
+#Configuration file for Hearts
+
+lang:
+  bloodheart-name: "&cBlood Heart"
+  bloodheart-lore: "&7A strange, blood red heart with special powers.\n\n&fLeft Click &7for &eHeart Beat\n&fRight Click &7for &eHeart Surge"
+  no-permission: "&cYou don't have permission!"
+  no-heart: "&cThere's no heart with this name."
+  heartbeat: "&eShockwave launched. You won't be able to launch it again for 60 seconds."
+
+custommodel:
+  bloodheart: 1000
+
+settings:
+  bloodheart-hearts: 2.0
+  bloodheart-heartsurge-cooldown: 30
+  bloodheart-heartbeat-cooldown: 60
