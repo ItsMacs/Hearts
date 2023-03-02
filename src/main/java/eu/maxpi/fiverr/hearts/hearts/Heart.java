@@ -1,8 +1,10 @@
 package eu.maxpi.fiverr.hearts.hearts;
 
 import de.tr7zw.nbtapi.NBTItem;
+import eu.maxpi.fiverr.hearts.Hearts;
 import eu.maxpi.fiverr.hearts.utils.ColorTranslator;
 import eu.maxpi.fiverr.hearts.utils.PluginLoader;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
@@ -11,7 +13,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.Arrays;
 
-public abstract class Heart {
+public abstract class Heart implements Listener {
 
     public String internalName;
     public String name;
@@ -24,6 +26,9 @@ public abstract class Heart {
         this.name = PluginLoader.lang.get(internalName + "-name");
         this.lore = PluginLoader.lang.get(internalName + "-lore");
         this.customModelData = PluginLoader.cmd.get(internalName);
+
+        Hearts.hearts.put(internalName, this);
+        Bukkit.getPluginManager().registerEvents(this, Hearts.getInstance());
     }
 
     public abstract void execute(Player p);

@@ -15,18 +15,14 @@ import org.bukkit.util.Vector;
 import java.time.ZonedDateTime;
 import java.util.HashMap;
 
-public class BloodHeart extends Heart implements Listener {
+public class BloodHeart extends Heart {
 
     public static HashMap<Player, Long> beatCooldown = new HashMap<>();
     public static HashMap<Player, Long> surgeCooldown = new HashMap<>();
 
     public BloodHeart() {
         super("bloodheart");
-
-        Bukkit.getPluginManager().registerEvents(this, Hearts.getInstance());
     }
-
-    
 
     @Override
     public void execute(Player p){
