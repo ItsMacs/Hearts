@@ -1,9 +1,7 @@
 package eu.maxpi.fiverr.hearts;
 
 import eu.maxpi.fiverr.hearts.commands.GetHeartCMD;
-import eu.maxpi.fiverr.hearts.hearts.BloodHeart;
-import eu.maxpi.fiverr.hearts.hearts.Heart;
-import eu.maxpi.fiverr.hearts.hearts.HeartboundSword;
+import eu.maxpi.fiverr.hearts.hearts.*;
 import eu.maxpi.fiverr.hearts.utils.HeartManager;
 import eu.maxpi.fiverr.hearts.utils.PluginLoader;
 import org.bukkit.Bukkit;
@@ -14,11 +12,11 @@ import java.util.HashMap;
 import java.util.Objects;
 
 /**
- * Blood Heart: An item that increases the player's max health and unlocks unique abilities. As the player collects more blood hearts, the strength of these abilities increases, making them valuable for any player looking to enhance their gameplay.
+ * DONE Blood Heart: An item that increases the player's max health and unlocks unique abilities. As the player collects more blood hearts, the strength of these abilities increases, making them valuable for any player looking to enhance their gameplay.
  *
  *
  *
- * Heartbound Sword: A powerful sword that deals extra damage when the player has more than five hearts.
+ * DONE Heartbound Sword: A powerful sword that deals extra damage when the player has more than five hearts.
  *
  *
  *
@@ -26,7 +24,7 @@ import java.util.Objects;
  *
  *
  *
- * Heart of Iron: A ring that increases the player's maximum health by 1 for every 5 hearts they have.
+ * DONE Heart of Iron: A ring that increases the player's maximum health by 1 for every 5 hearts they have.
  *
  *
  *
@@ -86,6 +84,8 @@ public final class Hearts extends JavaPlugin {
     private void loadHearts(){
         new BloodHeart();
         new HeartboundSword();
+        new HeartofIronHeart();
+        new HeartofFireHeart();
     }
 
     private void loadCommands(){

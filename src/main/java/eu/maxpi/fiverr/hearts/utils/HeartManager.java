@@ -20,13 +20,15 @@ public class HeartManager {
         relativeHearts.clear();
 
         Bukkit.getOnlinePlayers().forEach(p -> {
-            Hearts.hearts.values().forEach(h -> h.execute(p));
+            Hearts.hearts.values().forEach(h -> h.tryExecute(p));
 
-            if(Objects.equals(relativeHeartsBefore.getOrDefault(p, 0D), relativeHearts.getOrDefault(p, 0D))) return;
+            double relativeBefore = relativeHeartsBefore.getOrDefault(p, 0D);
+            double relativeNow = relativeHearts.getOrDefault(p, 0D);
+            if(Objects.equals(relativeBefore, relativeNow)) return;
 
             //oh god
-            double res = Math.abs(Math.max(relativeHearts.getOrDefault(p, 0D), relativeHeartsBefore.getOrDefault(p, 0D)) - Math.min(relativeHearts.getOrDefault(p, 0D), relativeHeartsBefore.getOrDefault(p, 0D)));
-            res = res * (relativeHearts.getOrDefault(p, 0D) >= relativeHeartsBefore.getOrDefault(p, 0D) ? +1 : -1);
+            double res = Math.abs(Math.max(relativeNow, relativeBefore) - Math.min(relativeNow, relativeBefore));
+            res = res * (relativeNow >= relativeBefore ? +1 : -1);
 
             setHealth(p, getHealth(p) + res);
         });

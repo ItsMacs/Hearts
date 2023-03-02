@@ -20,6 +20,7 @@ public abstract class Heart implements Listener {
     public String lore;
 
     public int customModelData;
+    public Material material = Material.RED_DYE;
 
     public Heart(String internalName){
         this.internalName = internalName;
@@ -29,6 +30,22 @@ public abstract class Heart implements Listener {
 
         Hearts.hearts.put(internalName, this);
         Bukkit.getPluginManager().registerEvents(this, Hearts.getInstance());
+    }
+
+    public Heart(String internalName, Material mat){
+        this.internalName = internalName;
+        this.name = PluginLoader.lang.get(internalName + "-name");
+        this.lore = PluginLoader.lang.get(internalName + "-lore");
+        this.customModelData = PluginLoader.cmd.get(internalName);
+        this.material = mat;
+
+        Hearts.hearts.put(internalName, this);
+        Bukkit.getPluginManager().registerEvents(this, Hearts.getInstance());
+    }
+
+    public void tryExecute(Player p){
+        if(getAmount(p) == 0) return;
+        execute(p);
     }
 
     public abstract void execute(Player p);
@@ -45,7 +62,7 @@ public abstract class Heart implements Listener {
     }
 
     public ItemStack item(){
-        ItemStack item = new ItemStack(Material.RED_DYE);
+        ItemStack item = new ItemStack(material);
         ItemMeta meta = item.getItemMeta();
         meta.setDisplayName(name);
         meta.setLore(Arrays.asList(lore.split("\n")));
