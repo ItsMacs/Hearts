@@ -3,15 +3,48 @@
 lang:
   bloodheart-name: "&cBlood Heart"
   bloodheart-lore: "&7A strange, blood red heart with special powers.\n\n&fLeft Click &7for &eHeart Beat\n&fRight Click &7for &eHeart Surge"
+  heartboundsword-name: "&4&lHeartbound Sword"
+  heartboundsword-lore: "&7Deals extra damage when you have more than 10 hearts"
+  heartoffire-name: "&6Heart of Fire"
+  heartoffire-lore: "&7A mighty potion that makes you immune to fire damage for some time!"
+  heartofiron-name: "&7Heart of Iron"
+  heartofiron-lore: "&7A strange ring that increases your health by 1 every 5 hearts"
+  heartofshadows-name: "&9Heart of Shadows"
+  heartofshadows-lore: "&7Makes you invisible to others when standing still"
+  heartofthestorm-name: "&cHeart of the Storm"
+  heartofthestorm-lore: "&7A mighty trinket that strikes enemies if you are attacked"
+  heartofthephoenix-name: "&e&lHeart of the Phoenix"
+  heartofthephoenix-lore: "&7A magical totem that's going to save you better than regular Totems!"
+  heartboundboots-name: "&a&lHeartbound Boots"
+  heartboundboots-lore: "&7A piece of armor that removes some damage from you!"
+  heartboundleggings-name: "&a&lHeartbound Leggings"
+  heartboundleggings-lore: "&7A piece of armor that removes some damage from you!"
+  heartboundhelmet-name: "&a&lHeartbound Helmet"
+  heartboundhelmet-lore: "&7A piece of armor that removes some damage from you!"
+  heartboundchestplate-name: "&a&lHeartbound Chestplate"
+  heartboundchestplate-lore: "&7A piece of armor that removes some damage from you!"
   no-permission: "&cYou don't have permission!"
   no-heart: "&cThere's no heart with this name."
   heartbeat: "&eShockwave launched. You won't be able to launch it again for 60 seconds."
+  heartsurge: "&eYou've become stronger because of Heart Surge. You won't be able to do this again for 30 seconds."
 
 custommodel:
   bloodheart: 1000
+  heartboundsword: 1001
+  heartoffire: 1002
+  heartofiron: 1003
+  heartofshadows: 1004
+  heartofthestorm: 1005
+  heartofthephoenix: 1006
+  heartboundboots: 2000
+  heartboundleggings: 2001
+  heartboundhelmet: 2002
+  heartboundchestplate: 2003
 
 settings:
   bloodheart-hearts: 2.0
   bloodheart-heartsurge-cooldown: 30
   bloodheart-heartbeat-cooldown: 60
   heartboundsword-damage-increase: 2
+  heartoffire-duration: 0.5 #Duration for each heart in seconds (10 hearts * 0.5s = 5s)
+  heartofthestorm-cooldown: 180

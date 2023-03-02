@@ -76,6 +76,7 @@ public abstract class Heart implements Listener {
 
     public boolean isItem(ItemStack i){
         if(i == null) return false;
+        if(i.getType() == Material.AIR) return false;
 
         NBTItem item = new NBTItem(i);
         return item.hasKey("heart") && item.getString("heart").equalsIgnoreCase(internalName);

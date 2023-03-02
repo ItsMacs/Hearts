@@ -1,63 +1,24 @@
 package eu.maxpi.fiverr.hearts;
 
+import com.lkeehl.tagapi.TagAPI;
 import eu.maxpi.fiverr.hearts.commands.GetHeartCMD;
+import eu.maxpi.fiverr.hearts.events.onPlayerKilled;
+import eu.maxpi.fiverr.hearts.events.onPlayerQuit;
 import eu.maxpi.fiverr.hearts.hearts.*;
+import eu.maxpi.fiverr.hearts.hearts.armor.HeartboundBoots;
+import eu.maxpi.fiverr.hearts.hearts.armor.HeartboundChestplate;
+import eu.maxpi.fiverr.hearts.hearts.armor.HeartboundHelmet;
+import eu.maxpi.fiverr.hearts.hearts.armor.HeartboundLeggings;
 import eu.maxpi.fiverr.hearts.utils.HeartManager;
 import eu.maxpi.fiverr.hearts.utils.PluginLoader;
 import org.bukkit.Bukkit;
+import org.bukkit.Particle;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.HashMap;
 import java.util.Objects;
 
-/**
- * DONE Blood Heart: An item that increases the player's max health and unlocks unique abilities. As the player collects more blood hearts, the strength of these abilities increases, making them valuable for any player looking to enhance their gameplay.
- *
- *
- *
- * DONE Heartbound Sword: A powerful sword that deals extra damage when the player has more than five hearts.
- *
- *
- *
- * Heartbound Armor: A set of armor that gives the player increased resistance to damage when they have more than ten hearts.
- *
- *
- *
- * DONE Heart of Iron: A ring that increases the player's maximum health by 1 for every 5 hearts they have.
- *
- *
- *
- * Heart of Fire: A potion that makes the player immune to fire damage for a short period of time, the effect duration increases for every heart the player has.
- *
- *
- *
- * Heart of Shadows: A cloak that makes the player invisible when they are standing still and have more than 5 hearts
- *
- *
- *
- * Heart of the Storm: A trinket that calls lightning to strike enemies when the player is hit and has more than 10 hearts.
- *
- *
- *
- * Heart of the Phoenix: A totem that revives the player when they die with an extra heart if they have more than 15 hearts.
- *
- *
- *
- * This plugin should be compatible with the lifesteal plugin.
- *
- *
- *
- * The two abilities for the blood heart :
- *
- *
- *
- * Heart Beat: An ability that creates a shockwave that damages enemies. The damage of the shockwave increases with the number of blood hearts the player has. For every blood heart above the 10 required to obtain Heart Beat, the damage becomes stronger.
- *
- *
- *
- * Heart Surge: An ability that increases the player's speed and damage for a short time. The base duration of the effect is 10 seconds, and for every additional blood heart the player has above the 5 required to obtain Heart Surge, the duration increases by 2 seconds.
- */
 public final class Hearts extends JavaPlugin {
 
     private static Hearts instance = null;
@@ -86,14 +47,24 @@ public final class Hearts extends JavaPlugin {
         new HeartboundSword();
         new HeartofIronHeart();
         new HeartofFireHeart();
+        new HeartOfShadowsHeart();
+        new HeartofTheStormHeart();
+        new HeartofThePhoenixHeart();
+
+        new HeartboundBoots();
+        new HeartboundChestplate();
+        new HeartboundLeggings();
+        new HeartboundHelmet();
     }
 
     private void loadCommands(){
         Objects.requireNonNull(getCommand("getheart")).setExecutor(new GetHeartCMD());
+        Objects.requireNonNull(getCommand("getheart")).setTabCompleter(new GetHeartCMD());
     }
 
     private void loadEvents(){
-
+        Bukkit.getPluginManager().registerEvents(new onPlayerQuit(), this);
+        Bukkit.getPluginManager().registerEvents(new onPlayerKilled(), this);
     }
 
     private void loadTasks(){
@@ -103,11 +74,23 @@ public final class Hearts extends JavaPlugin {
                 HeartManager.calcRelativeHearts();
             }
         }.runTaskTimer(this, 0L, 20L);
+
+        BloodHeart b = (BloodHeart)hearts.get("bloodheart");
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                b.showingTimer.keySet().forEach(p -> b.sphere(p.getLocation(), 2, Particle.BUBBLE_POP));
+            }
+        }.runTaskTimerAsynchronously(this, 0L, 2L);
     }
 
 
     @Override
     public void onDisable() {
+        Bukkit.getOnlinePlayers().forEach(p -> {
+            HeartManager.setHealth(p, HeartManager.getRealHealth(p));
+        });
+
         Bukkit.getLogger().info("Hearts by fiverr.com/macslolz was disabled successfully!");
     }
 }
