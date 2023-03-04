@@ -8,6 +8,7 @@ import eu.maxpi.fiverr.hearts.utils.PluginLoader;
 import org.bukkit.*;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.entity.SheepDyeWoolEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
@@ -62,6 +63,13 @@ public class BloodHeart extends Heart {
 
         beatCooldown.put(event.getPlayer(), ZonedDateTime.now().toEpochSecond() + (long)(double)PluginLoader.settings.get("bloodheart-heartbeat-cooldown"));
         event.getPlayer().sendMessage(PluginLoader.lang.get("heartbeat"));
+    }
+
+    @EventHandler
+    public void sheepDye(SheepDyeWoolEvent event){
+        if(event.getColor() != DyeColor.RED) return;
+
+        event.setCancelled(isItem(event.getPlayer().getInventory().getItemInMainHand()));
     }
 
     public void cylinder(Location loc, double r) {
