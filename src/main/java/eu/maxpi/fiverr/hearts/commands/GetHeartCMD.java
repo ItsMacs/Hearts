@@ -18,6 +18,11 @@ public class GetHeartCMD implements CommandExecutor, TabCompleter {
             return true;
         }
 
+        if(args.length != 1){
+            sender.sendMessage("/getheart <heart name>");
+            return true;
+        }
+
         if(!Hearts.hearts.containsKey(args[0].toLowerCase())) {
             sender.sendMessage(PluginLoader.lang.get("no-heart"));
             return true;

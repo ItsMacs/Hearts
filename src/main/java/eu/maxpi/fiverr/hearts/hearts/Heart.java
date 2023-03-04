@@ -12,6 +12,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.Arrays;
+import java.util.List;
 
 public abstract class Heart implements Listener {
 
@@ -61,6 +62,17 @@ public abstract class Heart implements Listener {
         return amt;
     }
 
+    public int getAmount(List<ItemStack> p){
+        int amt = 0;
+        for(ItemStack i : p){
+            if(!isItem(i)) continue;
+
+            amt += i.getAmount();
+        }
+
+        return amt;
+    }
+
     public ItemStack item(){
         ItemStack item = new ItemStack(material);
         ItemMeta meta = item.getItemMeta();
@@ -72,6 +84,12 @@ public abstract class Heart implements Listener {
         NBTItem i = new NBTItem(item);
         i.setString("heart", internalName);
         return i.getItem();
+    }
+
+    public ItemStack item(int amount){
+        ItemStack i = item();
+        i.setAmount(amount);
+        return i;
     }
 
     public boolean isItem(ItemStack i){
